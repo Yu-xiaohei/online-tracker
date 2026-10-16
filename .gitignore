@@ -5,9 +5,13 @@ obj/
 .vs/
 AppPackages/
 BundleArtifacts/
+installer/
+publish/
 restore.log
 restore.err
 build-err.txt
 **/logs/
 *.log
+*.pfx
+*.p12
 .DS_Store
