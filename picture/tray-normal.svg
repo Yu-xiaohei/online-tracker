@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- 托盘图标 - 正常状态：绿色简约雷达 + 泛光 -->
+  <defs>
+    <filter id="glowGreen" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g filter="url(#glowGreen)" fill="none" stroke="#22C55E" stroke-width="1.8">
+    <circle cx="16" cy="16" r="11"/>
+    <circle cx="16" cy="16" r="7" opacity="0.7"/>
+    <circle cx="16" cy="16" r="3" opacity="0.45"/>
+  </g>
+  <line x1="16" y1="16" x2="24" y2="8" stroke="#22C55E" stroke-width="1.8"
+        stroke-linecap="round" filter="url(#glowGreen)"/>
+  <circle cx="16" cy="16" r="2" fill="#22C55E" filter="url(#glowGreen)"/>
+  <circle cx="21" cy="19" r="1.6" fill="#22C55E" opacity="0.9" filter="url(#glowGreen)"/>
+</svg>

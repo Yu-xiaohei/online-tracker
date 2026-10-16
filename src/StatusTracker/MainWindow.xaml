@@ -1,0 +1,361 @@
+<Window
+    x:Class="StatusTracker.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="于の电脑 状态追踪器">
+
+    <Grid x:Name="RootGrid" Padding="24,16,24,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="12" Margin="0,0,0,16">
+            <Image Source="ms-appx:///Assets/app-icon.png" Width="28" Height="28" />
+            <TextBlock Text="于の电脑 状态追踪器" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" />
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Spacing="12">
+
+                <!-- 1 网络与服务状态 -->
+                <Border Style="{StaticResource CardBorderStyle}">
+                    <StackPanel>
+                        <Grid Padding="16,12" ColumnSpacing="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE701;" FontSize="20" VerticalAlignment="Center"
+                                      Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="网络与服务状态" Style="{StaticResource SubtitleTextBlockStyle}" />
+                                <TextBlock Text="检查您的 网络 与 追踪器服务 运行状态"
+                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+                        </Grid>
+                        <Border Height="1" Background="{ThemeResource DividerStrokeColorDefaultBrush}" />
+
+                        <Grid Padding="16,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Clash 运行状态" VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1" Margin="12,0" VerticalAlignment="Center"
+                                       Text="{x:Bind Vm.ClashText, Mode=OneWay}" />
+                            <FontIcon Grid.Column="2" VerticalAlignment="Center"
+                                      Glyph="{x:Bind Vm.ClashGlyph, Mode=OneWay}"
+                                      Foreground="{ThemeResource SystemFillColorSuccessBrush}" />
+                        </Grid>
+                        <Grid Padding="16,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="VPN 连接状态" VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1" Margin="12,0" VerticalAlignment="Center"
+                                       Text="{x:Bind Vm.VpnText, Mode=OneWay}" />
+                            <FontIcon Grid.Column="2" VerticalAlignment="Center"
+                                      Glyph="{x:Bind Vm.VpnGlyph, Mode=OneWay}"
+                                      Foreground="{ThemeResource SystemFillColorCautionBrush}" />
+                        </Grid>
+                        <Grid Padding="16,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Telegram 通知服务" VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1" Margin="12,0" VerticalAlignment="Center"
+                                       Text="{x:Bind Vm.TelegramText, Mode=OneWay}" />
+                            <FontIcon Grid.Column="2" VerticalAlignment="Center"
+                                      Glyph="{x:Bind Vm.TelegramGlyph, Mode=OneWay}"
+                                      Foreground="{ThemeResource SystemFillColorSuccessBrush}" />
+                        </Grid>
+                        <Grid Padding="16,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Google 连接状态" VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1" Margin="12,0" VerticalAlignment="Center"
+                                       Text="{x:Bind Vm.GoogleText, Mode=OneWay}" />
+                            <FontIcon Grid.Column="2" VerticalAlignment="Center"
+                                      Glyph="{x:Bind Vm.GoogleGlyph, Mode=OneWay}"
+                                      Foreground="{ThemeResource SystemFillColorSuccessBrush}" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- 2 Bot 消息发送状态 -->
+                <Border Style="{StaticResource CardBorderStyle}">
+                    <StackPanel>
+                        <Grid Padding="16,12">
+                            <StackPanel>
+                                <TextBlock Text="Bot 消息发送状态" Style="{StaticResource SubtitleTextBlockStyle}" />
+                                <TextBlock Text="检查您的 Telegram Bot 是否成功发送提醒消息"
+                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+                        </Grid>
+                        <Border Height="1" Background="{ThemeResource DividerStrokeColorDefaultBrush}" />
+                        <Grid Padding="16,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="上次开机提醒发送" />
+                                <TextBlock Text="{x:Bind Vm.LastBootText, Mode=OneWay}"
+                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                <TextBlock Text="{x:Bind Vm.LastBootState, Mode=OneWay}" />
+                                <FontIcon Glyph="{x:Bind Vm.LastBootGlyph, Mode=OneWay}"
+                                          Foreground="{ThemeResource SystemFillColorSuccessBrush}" />
+                            </StackPanel>
+                        </Grid>
+                        <Grid Padding="16,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="上次关机提醒发送" />
+                                <TextBlock Text="{x:Bind Vm.LastShutdownText, Mode=OneWay}"
+                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                <TextBlock Text="{x:Bind Vm.LastShutdownState, Mode=OneWay}" />
+                                <FontIcon Glyph="{x:Bind Vm.LastShutdownGlyph, Mode=OneWay}"
+                                          Foreground="{ThemeResource SystemFillColorCautionBrush}" />
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- 3 通知通道 -->
+                <Border Style="{StaticResource CardBorderStyle}">
+                    <StackPanel>
+                        <Grid Padding="16,12">
+                            <StackPanel>
+                                <TextBlock Text="通知通道" Style="{StaticResource SubtitleTextBlockStyle}" />
+                                <TextBlock Text="官方直连 与 CF 转发 健康状态"
+                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+                        </Grid>
+                        <Border Height="1" Background="{ThemeResource DividerStrokeColorDefaultBrush}" />
+                        <Grid Padding="16,12">
+                            <TextBlock Text="当前模式" VerticalAlignment="Center" />
+                            <TextBlock HorizontalAlignment="Right" Text="{x:Bind Vm.ChannelModeText, Mode=OneWay}" />
+                        </Grid>
+                        <Grid Padding="16,12">
+                            <TextBlock Text="官方通道" VerticalAlignment="Center" />
+                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Spacing="8">
+                                <TextBlock Text="{x:Bind Vm.OfficialChannelText, Mode=OneWay}" />
+                                <FontIcon Glyph="{x:Bind Vm.OfficialChannelGlyph, Mode=OneWay}"
+                                          Foreground="{ThemeResource SystemFillColorSuccessBrush}" />
+                            </StackPanel>
+                        </Grid>
+                        <Grid Padding="16,12">
+                            <TextBlock Text="CF 通道" VerticalAlignment="Center" />
+                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Spacing="8">
+                                <TextBlock Text="{x:Bind Vm.CfChannelText, Mode=OneWay}" />
+                                <FontIcon Glyph="{x:Bind Vm.CfChannelGlyph, Mode=OneWay}"
+                                          Foreground="{ThemeResource SystemFillColorCautionBrush}" />
+                            </StackPanel>
+                        </Grid>
+                        <Grid Padding="16,12">
+                            <TextBlock Text="上次通知" VerticalAlignment="Center" />
+                            <TextBlock HorizontalAlignment="Right" Text="{x:Bind Vm.LastNotifyText, Mode=OneWay}" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- 4 手动发送 -->
+                <Border Style="{StaticResource CardBorderStyle}">
+                    <Expander HorizontalAlignment="Stretch">
+                        <Expander.Header>
+                            <Grid Padding="8,4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <FontIcon Glyph="&#xE724;" FontSize="20" VerticalAlignment="Center" Margin="0,0,12,0"
+                                          Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock Text="手动发送状态" Style="{StaticResource SubtitleTextBlockStyle}" />
+                                    <TextBlock Text="手动向您的 Telegram Bot 发送状态提醒消息"
+                                               Style="{StaticResource CaptionTextBlockStyle}"
+                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                </StackPanel>
+                            </Grid>
+                        </Expander.Header>
+                        <StackPanel>
+                            <Border Height="1" Background="{ThemeResource DividerStrokeColorDefaultBrush}" />
+                            <Grid Padding="16,12">
+                                <TextBlock Text="开机提醒" VerticalAlignment="Center" />
+                                <Button HorizontalAlignment="Right" Content="发送消息"
+                                        Command="{x:Bind Vm.SendBootManualCommand}" />
+                            </Grid>
+                            <Grid Padding="16,12">
+                                <TextBlock Text="关机提醒" VerticalAlignment="Center" />
+                                <Button HorizontalAlignment="Right" Content="发送消息"
+                                        Command="{x:Bind Vm.SendShutdownManualCommand}" />
+                            </Grid>
+                        </StackPanel>
+                    </Expander>
+                </Border>
+
+                <!-- 5 配置 -->
+                <Border Style="{StaticResource CardBorderStyle}">
+                    <Expander x:Name="ConfigExpander" HorizontalAlignment="Stretch">
+                        <Expander.Header>
+                            <Grid Padding="8,4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <FontIcon Glyph="&#xE713;" FontSize="20" VerticalAlignment="Center" Margin="0,0,12,0"
+                                          Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock Text="配置" Style="{StaticResource SubtitleTextBlockStyle}" />
+                                    <TextBlock Text="修改您的 应用设置 与 配置信息"
+                                               Style="{StaticResource CaptionTextBlockStyle}"
+                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                </StackPanel>
+                            </Grid>
+                        </Expander.Header>
+                        <StackPanel>
+                            <Border Height="1" Background="{ThemeResource DividerStrokeColorDefaultBrush}" />
+
+                            <Grid Padding="16,12">
+                                <TextBlock Text="Chat ID" VerticalAlignment="Center" />
+                                <TextBox Width="240" HorizontalAlignment="Right"
+                                         Text="{x:Bind Vm.ChatId, Mode=TwoWay}" />
+                            </Grid>
+
+                            <Grid Padding="16,12">
+                                <TextBlock Text="Bot Token" VerticalAlignment="Center" />
+                                <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
+                                    <PasswordBox x:Name="TokenBox" Width="200" PasswordChar="●"
+                                                 PasswordChanged="OnTokenPasswordChanged" />
+                                    <ToggleButton IsChecked="{x:Bind Vm.TokenVisible, Mode=OneWay}"
+                                                  Command="{x:Bind Vm.ToggleTokenVisibilityCommand}"
+                                                  Click="OnTokenVisibilityClick"
+                                                  ToolTipService.ToolTip="显示 / 隐藏 Token">
+                                        <FontIcon Glyph="&#xE890;" />
+                                    </ToggleButton>
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid Padding="16,12">
+                                <TextBlock Text="CF 转发器地址" VerticalAlignment="Center" />
+                                <TextBox Width="280" HorizontalAlignment="Right"
+                                         PlaceholderText="https://xxx.workers.dev/SECRET/"
+                                         Text="{x:Bind Vm.CfBaseUrl, Mode=TwoWay}" />
+                            </Grid>
+
+                            <Grid Padding="16,12">
+                                <TextBlock Text="通道模式" VerticalAlignment="Center" />
+                                <ComboBox Width="180" HorizontalAlignment="Right"
+                                          SelectedIndex="{x:Bind Vm.ChannelModeIndex, Mode=TwoWay}">
+                                    <ComboBoxItem Content="自动" />
+                                    <ComboBoxItem Content="仅官方直连" />
+                                    <ComboBoxItem Content="仅CF转发" />
+                                </ComboBox>
+                            </Grid>
+
+                            <Grid Padding="16,12">
+                                <TextBlock Text="Clash 连接端口" VerticalAlignment="Center" />
+                                <TextBox Width="120" HorizontalAlignment="Right"
+                                         Text="{x:Bind Vm.ProxyPortText, Mode=TwoWay}" />
+                            </Grid>
+
+                            <Grid Padding="16,12">
+                                <TextBlock Text="主题" VerticalAlignment="Center" />
+                                <ComboBox Width="180" HorizontalAlignment="Right"
+                                          SelectedIndex="{x:Bind Vm.ThemeModeIndex, Mode=TwoWay}"
+                                          SelectionChanged="OnThemeComboChanged">
+                                    <ComboBoxItem Content="跟随系统" />
+                                    <ComboBoxItem Content="黑暗主题" />
+                                    <ComboBoxItem Content="明亮主题" />
+                                </ComboBox>
+                            </Grid>
+
+                            <Grid Padding="16,12">
+                                <TextBlock Text="开机自启动" VerticalAlignment="Center" />
+                                <ToggleSwitch HorizontalAlignment="Right" IsOn="{x:Bind Vm.AutostartEnabled, Mode=TwoWay}" />
+                            </Grid>
+
+                            <Grid Padding="16,12">
+                                <TextBlock Text="关闭窗口后在托盘运行" VerticalAlignment="Center" />
+                                <ToggleSwitch HorizontalAlignment="Right" IsOn="{x:Bind Vm.MinimizeToTray, Mode=TwoWay}" />
+                            </Grid>
+
+                            <Grid Padding="16,12">
+                                <StackPanel>
+                                    <TextBlock Text="关机前登录提醒" />
+                                    <TextBlock Text="关机前向您发送 微信登录 的提醒弹窗"
+                                               Style="{StaticResource CaptionTextBlockStyle}"
+                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                </StackPanel>
+                                <ToggleSwitch HorizontalAlignment="Right" VerticalAlignment="Center"
+                                              IsOn="{x:Bind Vm.ShutdownReminderEnabled, Mode=TwoWay}" />
+                            </Grid>
+
+                            <StackPanel Orientation="Horizontal" Spacing="12"
+                                        HorizontalAlignment="Center" Margin="0,12,0,8">
+                                <Button Content="保存" Style="{StaticResource AccentButtonStyle}"
+                                        Command="{x:Bind Vm.SaveCommand}" MinWidth="120" />
+                                <Button Content="重置" Command="{x:Bind Vm.ResetCommand}" MinWidth="120" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Expander>
+                </Border>
+
+                <!-- 6 检查更新 -->
+                <Border Style="{StaticResource CardBorderStyle}">
+                    <Grid Padding="16,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <FontIcon Glyph="&#xE72C;" FontSize="20" VerticalAlignment="Center" Margin="0,0,12,0"
+                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="检查更新" Style="{StaticResource SubtitleTextBlockStyle}" />
+                            <TextBlock Text="前往 Github 查看最新版应用"
+                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+                        <Button Grid.Column="2" Content="检查更新" Command="{x:Bind Vm.OpenGitHubCommand}" />
+                    </Grid>
+                </Border>
+
+                <TextBlock Text="{x:Bind Vm.StatusMessage, Mode=OneWay}"
+                           HorizontalAlignment="Center"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                           Margin="0,8,0,0" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="2" Spacing="4" Margin="0,12,0,0" HorizontalAlignment="Center">
+            <TextBlock Text="Version: 1.0.0 v" Style="{StaticResource CaptionTextBlockStyle}"
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" />
+            <TextBlock Text="© 2024-2026 YUNO BASE All rights reserved."
+                       Style="{StaticResource CaptionTextBlockStyle}"
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" />
+        </StackPanel>
+    </Grid>
+</Window>

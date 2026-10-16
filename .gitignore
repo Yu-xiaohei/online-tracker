@@ -1,0 +1,13 @@
+bin/
+obj/
+*.user
+*.suo
+.vs/
+AppPackages/
+BundleArtifacts/
+restore.log
+restore.err
+build-err.txt
+**/logs/
+*.log
+.DS_Store
